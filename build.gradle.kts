@@ -13,6 +13,8 @@ taboolib {
     install("module-ui")
     install("platform-bukkit")
     install("expansion-command-helper")
+    install("module-database")
+    install("expansion-player-database")
     classifier = null
     version = "6.0.10-42"
 }

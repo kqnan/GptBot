@@ -1,13 +1,10 @@
-package me.kqn.gptbot
+package me.kqn.gptbot.Bot
 
 import org.apache.http.Consts
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.HttpClients
 import org.apache.http.util.EntityUtils
-import org.bukkit.Bukkit
-import taboolib.common.util.asList
-import taboolib.library.configuration.ConfigurationSection
 import taboolib.module.configuration.Configuration
 import taboolib.module.configuration.Type
 
@@ -22,8 +19,14 @@ class ChatGPT : IChatBot {
     var defaultResponse:String
     var max_token: Int
     var api_key: String
-    var model:Model
-    constructor(api_key:String,model:Model,token_lenght:Int,defaultResponse:String){
+    var model: Model
+
+    companion object{
+        fun instance(api_key:String, model: Model, token_lenght:Int, defaultResponse:String): ChatGPT {
+            return ChatGPT(api_key, model, token_lenght, defaultResponse)
+        }
+    }
+    private constructor(api_key:String, model: Model, token_lenght:Int, defaultResponse:String){
         this.api_key=api_key
         this.model=model
         this.max_token=token_lenght
@@ -58,7 +61,7 @@ class ChatGPT : IChatBot {
         try {
             val response = httpClient.execute(request)
             val result = EntityUtils.toString(response.entity)
-            Bukkit.getLogger().info(result)
+
             val json=Configuration.loadFromString(result, Type.JSON)
             val text=((json.get("choices") as List<*>)[0] as LinkedHashMap<*,*>).get("text") as String
             text.removePrefix("\n\n")
