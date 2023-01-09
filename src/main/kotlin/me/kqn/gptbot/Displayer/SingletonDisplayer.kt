@@ -4,6 +4,7 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import taboolib.common.platform.ProxyPlayer
 import taboolib.common.platform.function.submitAsync
+import taboolib.common5.util.createBar
 import taboolib.common5.util.printed
 import taboolib.module.chat.colored
 import taboolib.platform.util.sendActionBar

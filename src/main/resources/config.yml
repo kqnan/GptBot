@@ -1,12 +1,20 @@
+debug: false
 ChatGpt:
-  api_key: "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"
+  api_key: "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"
   Model: "TEXT_DAVINCI_003"
   token_length: 1024
   default_response: "&a机器人迷糊了"
+  name: "ChatGpt"
+  format: "&a%name%&8>>&c&l@%player_name%&f%text%"
 autoChat:
   enable: true
   interval: 1
-
+#玩家主动呼叫机器人
+atBot:
+  prefix: "@%name%"
+  condition: ''
+  action: ''
+  deny: ''
 database:
   enable: false
   host: localhost

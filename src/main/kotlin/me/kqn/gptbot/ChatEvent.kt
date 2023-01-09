@@ -13,10 +13,17 @@ import taboolib.common5.Baffle
 import taboolib.platform.type.BukkitPlayer
 import java.lang.Boolean
 
-object AutoChat {
+object ChatEvent {
     val baffle=Baffle.of(ConfigObject.autoChat_interval.toInt())
     @SubscribeEvent
     fun autoChat(e:AsyncPlayerChatEvent){
+
+
+
+
+
+
+        //×Ô¶¯ÁÄÌì
         if(ConfigObject.autoChat_enable== Boolean(false))return
         if(baffle.hasNext()){
             baffle.next()
@@ -35,7 +42,6 @@ object AutoChat {
                     }
                 }
             }
-
         }
     }
     @Awake(LifeCycle.DISABLE)

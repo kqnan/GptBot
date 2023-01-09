@@ -15,10 +15,7 @@ import taboolib.common.platform.event.SubscribeEvent
 import taboolib.common.platform.function.getDataFolder
 import taboolib.common.platform.function.submit
 import taboolib.common.util.asList
-import taboolib.expansion.getDataContainer
-import taboolib.expansion.releaseDataContainer
-import taboolib.expansion.setupDataContainer
-import taboolib.expansion.setupPlayerDatabase
+import taboolib.expansion.*
 import taboolib.module.chat.colored
 import taboolib.platform.BukkitPlugin
 import taboolib.platform.util.actionBar
@@ -29,6 +26,8 @@ object GptBot : Plugin() {
     lateinit var gpt: ChatGPT
     var echo=true
     lateinit var plugin:JavaPlugin
+
+    // TODO: 2023/1/9  1.主动@机器人 ，需要金币花费或者权限，或者执行动作  2.游戏中更换apikey 3.游戏中查看apikey的余额  4.自动重载的耦合度太高
     override fun onEnable() {
         var conf=ConfigObject.config
         if (conf.getBoolean("database.enable")) {
@@ -53,8 +52,7 @@ object GptBot : Plugin() {
         // 初始化玩家容器
 
         e.player.setupDataContainer()
-        // 读取或写入数据（写入时唤起异步 I/O 任务，尽量避免高频写入）
-        e.player.getDataContainer()["display_length"] = 50
+
     }
 
     @SubscribeEvent
@@ -64,8 +62,9 @@ object GptBot : Plugin() {
     }
     fun registercommand(){
         command(name="GptBot", aliases = listOf("gb,bot,chatbot,cb")){
+            createHelper()
             literal("set-length"){
-                dynamic {
+                dynamic (comment = "设置机器人输出的文本的最大显示长度"){
                     execute<Player>(){sender, context, argument ->
                         try {
                             sender.getDataContainer()["display_length"]=argument.toInt()
@@ -75,12 +74,21 @@ object GptBot : Plugin() {
                     }
                 }
             }
+            literal("kether"){
+                dynamic ("执行一段kether动作"){
+                    execute<Player>(){sender, context, argument ->
+
+                        println(argument.asList().eval(sender))
+
+                    }
+                }
+            }
             literal("debug"){
-                dynamic {
+                dynamic ("选择模型"){
                     suggestion<CommandSender>(uncheck = false){ sender, context ->
                         ChatGPT.Model.values().asList()
                     }
-                    dynamic {
+                    dynamic ("输入文本") {
                         suggestion<CommandSender>(uncheck = true){
                             sender, context ->
                             listOf("请输入你想和ai机器人说的话".colored())

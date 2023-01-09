@@ -11,11 +11,24 @@ object ConfigObject {
     lateinit var autoChat_enable:java.lang.Boolean
     @ConfigNode(value = "autoChat.interval","config.yml")
     lateinit var autoChat_interval:Integer
-
+    @ConfigNode(value="debug")
+    lateinit var debug:java.lang.Boolean
     @ConfigNode(value = "ChatGpt.api_key")
     lateinit var api_key:String
     @ConfigNode(value = "ChatGpt.Model")
     lateinit var model:String
+    @ConfigNode(value="ChatGpt.name")
+    lateinit var name:String
+    @ConfigNode(value = "ChatGpt.format")
+    lateinit var format:String
+    @ConfigNode(value="atBot.condition")
+    lateinit var condition:String
+    @ConfigNode(value = "atBot.action")
+    lateinit var action:String
+    @ConfigNode(value = "atBot.prefix")
+    lateinit var prefix:String
+    @ConfigNode(value="atBot.deny")
+    lateinit var deny:String
 
     @ConfigNode(value = "ChatGpt.token_length")
     lateinit var token_len:Integer

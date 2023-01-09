@@ -2,15 +2,19 @@ package me.kqn.gptbot.Displayer
 
 import me.kqn.gptbot.ConfigObject
 import me.kqn.gptbot.cut
+import me.kqn.gptbot.debug
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import taboolib.common.platform.function.info
 import taboolib.common.platform.function.submit
+import taboolib.common.util.sync
 import taboolib.expansion.getDataContainer
 import taboolib.module.chat.HexColor
 import taboolib.module.chat.colored
 import taboolib.module.chat.uncolored
+import taboolib.platform.compat.PlaceholderExpansion
+import taboolib.platform.compat.replacePlaceholder
 
 class FancyChatDisplayer  :IDisplayer{
 
@@ -44,7 +48,7 @@ companion object
         if(player is Player){
             display_len=(player as Player).getDataContainer()["display_length"]?.toInt()?:0
         }
-        info(display_len)
+        debug(display_len.toString())
         txt=txt.cut(display_len)
         if(unitLines){
             var builder=StringBuilder()
@@ -53,17 +57,16 @@ companion object
         }
 
 
+        var format=ConfigObject.format
 
-        if(atPlayer){
             txt.forEach {
-                player.sendMessage((prefix+atPattern.replace("%player_name%",player.name)+linePattern.replace("%text%",it)).colored())
+                var msg=format.replace("%name%",ConfigObject.name.colored()).replace("%text%",it.colored())
+                msg= sync { msg.replacePlaceholder(player as Player) }
+
+                //player.sendMessage((prefix+atPattern.replace("%player_name%",player.name)+linePattern.replace("%text%",it)).colored())
+                player.sendMessage(msg.colored())
             }
-        }
-        else {
-            txt.forEach {
-                player.sendMessage((prefix+linePattern.replace("%text%",it)).colored())
-            }
-        }
+
 
     }
 }
