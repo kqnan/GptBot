@@ -12,14 +12,36 @@ import taboolib.common.platform.function.submitAsync
 import taboolib.common5.Baffle
 import taboolib.platform.type.BukkitPlayer
 import java.lang.Boolean
+import java.util.concurrent.TimeUnit
 
 object ChatEvent {
     val baffle=Baffle.of(ConfigObject.autoChat_interval.toInt())
+    val baffle10s=Baffle.of(ConfigObject.cool.toLong(),TimeUnit.SECONDS)
     @SubscribeEvent
     fun autoChat(e:AsyncPlayerChatEvent){
+        //主动呼叫
+        if(ConfigObject.enable.booleanValue()){
+            var prefix=ConfigObject.prefix
+            var chagemsg=e.message
+            if(chagemsg.startsWith(prefix)){//判断前缀
+                var condition=ConfigObject.condition
+                submitAsync {//异步执行动作，防止卡主线程
+                    var res=condition.eval(e.player)//执行条件动作的判断
+                    if(res!=null){
+                        var b=res.get() as kotlin.Boolean
+                        if(b){
+                            var action=ConfigObject.action
+
+                        }
 
 
 
+
+                    }
+                }
+            }
+
+        }
 
 
 
@@ -47,5 +69,6 @@ object ChatEvent {
     @Awake(LifeCycle.DISABLE)
     fun reset(){
         baffle.resetAll()
+        baffle10s.resetAll()
     }
 }

@@ -3,6 +3,7 @@ package me.kqn.gptbot
 import me.kqn.gptbot.Bot.ChatGPT
 import me.kqn.gptbot.Displayer.SingletonDisplayer
 import net.minecraft.network.protocol.game.PacketPlayOutEntity
+import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerJoinEvent
@@ -13,6 +14,7 @@ import taboolib.common.platform.Plugin
 import taboolib.common.platform.command.command
 import taboolib.common.platform.event.SubscribeEvent
 import taboolib.common.platform.function.getDataFolder
+import taboolib.common.platform.function.getProxyPlayer
 import taboolib.common.platform.function.submit
 import taboolib.common.util.asList
 import taboolib.expansion.*
@@ -27,7 +29,7 @@ object GptBot : Plugin() {
     var echo=true
     lateinit var plugin:JavaPlugin
 
-    // TODO: 2023/1/9  1.主动@机器人 ，需要金币花费或者权限，或者执行动作  2.游戏中更换apikey 3.游戏中查看apikey的余额  4.自动重载的耦合度太高
+    // TODO: 2023/1/9  1.主动@机器人 ，需要金币花费或者权限，或者执行动作  2.游戏中更换apikey 3.游戏中查看apikey的余额  4.自动重载的耦合度太高 7.自定义机器人
     override fun onEnable() {
         var conf=ConfigObject.config
         if (conf.getBoolean("database.enable")) {
@@ -39,8 +41,8 @@ object GptBot : Plugin() {
             ChatGPT.Model.valueOf(ConfigObject.model),ConfigObject.token_len.toInt(),ConfigObject.defualt_answer.colored())
         registercommand()
         plugin= BukkitPlugin.getInstance()
-
-
+        debug(ConfigObject.condition)
+    //ConfigObject.condition.eval(Bukkit.getPlayer("Kurt_Kong")!!)
     }
     override fun onDisable(){
         for (onlinePlayer in onlinePlayers) {
@@ -78,7 +80,7 @@ object GptBot : Plugin() {
                 dynamic ("执行一段kether动作"){
                     execute<Player>(){sender, context, argument ->
 
-                        println(argument.asList().eval(sender))
+                        debug(argument.asList().eval(sender)?.get().toString())
 
                     }
                 }

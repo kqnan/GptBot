@@ -11,9 +11,12 @@ autoChat:
   interval: 1
 #玩家主动呼叫机器人
 atBot:
+  enable: true
+  cool: 10
   prefix: "@%name%"
   condition: ''
-  action: ''
+  action:
+    -
   deny: ''
 database:
   enable: false

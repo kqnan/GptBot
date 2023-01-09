@@ -8,16 +8,26 @@ import taboolib.common.platform.function.adaptPlayer
 import taboolib.common.platform.function.info
 import taboolib.module.kether.KetherShell
 import taboolib.module.kether.printKetherErrorMessage
+import java.util.concurrent.CompletableFuture
 
 fun debug(msg:String){
    if(ConfigObject.debug.booleanValue()) Bukkit.getLogger().info(msg)
 }
-fun List<String>.eval(player: Player) {
+fun List<String>.eval(player: Player):CompletableFuture<*>?{
     try {
-        KetherShell.eval(this, sender = adaptPlayer(player))
+       return KetherShell.eval(this, sender = adaptPlayer(player), cacheScript = true)
     } catch (e: Throwable) {
         e.printKetherErrorMessage()
     }
+    return null
+}
+fun String.eval(player: Player):CompletableFuture<*>?{
+    try {
+        return KetherShell.eval(this, sender = adaptPlayer(player), cacheScript = true)
+    }catch (e:Exception){
+        e.printStackTrace()
+    }
+    return null
 }
 fun Array<String>.cut(length_limit:Int):Array<String>{
     var sb=StringBuilder()
