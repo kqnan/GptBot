@@ -14,10 +14,9 @@ atBot:
   enable: true
   cool: 10
   prefix: "@%name%"
-  condition: ''
-  action:
-    -
-  deny: ''
+  condition: 'all [ money 100 points 100 perm vip ]'
+  action: 'takeMoney 100 takePoints 100'
+  deny: 'tell 您的金币或点券不足,或者正在冷却中...'
 database:
   enable: false
   host: localhost

@@ -1,1 +1,4 @@
 WRONG_NUMBER: "&f错误的数字"
+COOLING: "&a呼叫AI功能正在冷却中..."
+SUCCESS_SET: "&a设置成功"
+EXCEED_LIMIT: "&a超过上限，最大上限:%token_length%"

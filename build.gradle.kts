@@ -10,9 +10,6 @@ taboolib {
     install("common-5")
     install("module-chat")
     install("module-configuration")
-    install("module-ui")
-    install("module-nms")
-    install("module-nms-util")
     install("platform-bukkit")
     install("module-kether")
     install("expansion-command-helper")
@@ -29,12 +26,17 @@ repositories {
     maven ( "https://maven.aliyun.com/repository/google")
     maven ( "https://maven.aliyun.com/repository/public" )
     maven(  "https://maven.aliyun.com/repository/gradle-plugin" )
+
+
+
+
+
     mavenCentral()
 }
 
 dependencies {
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
-    compileOnly ("com.github.MilkBowl:VaultAPI:1.7")
+
     compileOnly("ink.ptms:nms-all:1.0.0")
     compileOnly("ink.ptms.core:v11902:11902-minimize:mapped")
     compileOnly("ink.ptms.core:v11902:11902-minimize:universal")

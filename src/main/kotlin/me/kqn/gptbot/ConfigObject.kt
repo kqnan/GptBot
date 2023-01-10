@@ -25,10 +25,10 @@ object ConfigObject {
     lateinit var condition:String
     @ConfigNode(value = "atBot.action")
     lateinit var action:String
-    @ConfigNode(value = "atBot.prefix")
-    lateinit var prefix:String
     @ConfigNode(value="atBot.deny")
     lateinit var deny:String
+    @ConfigNode(value = "atBot.prefix")
+    lateinit var prefix:String
     @ConfigNode(value="atBot.enable")
     lateinit var enable:java.lang.Boolean
     @ConfigNode(value="atBot.cool")

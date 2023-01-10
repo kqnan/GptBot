@@ -10,6 +10,8 @@ object Message {
     lateinit var message:Configuration
     @ConfigNode(value="WRONG_NUMBER",bind = "message.yml")
     lateinit var WRONG_NUMBER:String
+    @ConfigNode(value = "COOLING", bind = "message.yml")
+    lateinit var COOLING:String
     fun save(){
         ConfigObject.config.saveToFile(File("plugins/GptBot/config.yml"))
     }

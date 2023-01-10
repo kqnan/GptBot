@@ -9,6 +9,8 @@ import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.plugin.java.JavaPlugin
+import taboolib.common.env.RuntimeDependencies
+import taboolib.common.env.RuntimeDependency
 import taboolib.common.io.newFile
 import taboolib.common.platform.Plugin
 import taboolib.common.platform.command.command
@@ -20,6 +22,7 @@ import taboolib.common.util.asList
 import taboolib.expansion.*
 import taboolib.module.chat.colored
 import taboolib.platform.BukkitPlugin
+import taboolib.platform.compat.VaultService
 import taboolib.platform.util.actionBar
 import taboolib.platform.util.onlinePlayers
 
@@ -41,8 +44,8 @@ object GptBot : Plugin() {
             ChatGPT.Model.valueOf(ConfigObject.model),ConfigObject.token_len.toInt(),ConfigObject.defualt_answer.colored())
         registercommand()
         plugin= BukkitPlugin.getInstance()
-        debug(ConfigObject.condition)
-    //ConfigObject.condition.eval(Bukkit.getPlayer("Kurt_Kong")!!)
+ //       debug(ConfigObject.condition)
+
     }
     override fun onDisable(){
         for (onlinePlayer in onlinePlayers) {

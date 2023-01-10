@@ -35,6 +35,7 @@ class ChatGPT : IChatBot {
         this.defaultResponse=defaultResponse
     }
     override fun input(vararg text: String): Array<String> {
+        debug(text[0])
         return mainChat(text[0]).toTypedArray()
     }
     private fun moderations(input:String):Boolean{
