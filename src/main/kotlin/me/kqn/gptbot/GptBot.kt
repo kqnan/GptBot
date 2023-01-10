@@ -73,11 +73,19 @@ object GptBot : Plugin() {
             literal("set-length"){
                 dynamic (comment = "设置机器人输出的文本的最大显示长度"){
                     execute<Player>(){sender, context, argument ->
+                        var len=0
                         try {
-                            sender.getDataContainer()["display_length"]=argument.toInt()
+                            len=argument.toInt()
                         }catch (e:Exception){
                             sender.sendMessage(Message.WRONG_NUMBER.colored())
+                            return@execute
                         }
+                        if(len>ConfigObject.token_len.toInt()){
+                            sender.sendMessage(Message.EXCEED_LIMIT.replace("%token_length%",ConfigObject.token_len.toString()).colored())
+                            return@execute
+                        }
+                        sender.getDataContainer()["display_length"]=argument.toInt()
+                        sender.sendMessage(Message.SUCCESS_SET.colored())
                     }
                 }
             }

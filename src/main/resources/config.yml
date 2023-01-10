@@ -8,7 +8,7 @@ ChatGpt:
   format: "&a%name%&8>>&c&l@%player_name%&f%text%"
 autoChat:
   enable: true
-  interval: 1
+  interval: 10
 #玩家主动呼叫机器人
 atBot:
   enable: true
