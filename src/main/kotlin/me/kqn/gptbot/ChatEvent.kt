@@ -16,8 +16,8 @@ import java.lang.Boolean
 import java.util.concurrent.TimeUnit
 
 object ChatEvent {
-    val baffle=Baffle.of(ConfigObject.autoChat_interval.toInt())
-    val baffle10s=Baffle.of(ConfigObject.cool.toLong(),TimeUnit.SECONDS)
+    var baffle=Baffle.of(ConfigObject.autoChat_interval.toInt())
+    var baffle10s=Baffle.of(ConfigObject.cool.toLong(),TimeUnit.SECONDS)
     @SubscribeEvent
     fun autoChat(e:AsyncPlayerChatEvent){
         //Ö÷¶¯ºô½Ð

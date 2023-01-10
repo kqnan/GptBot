@@ -19,12 +19,14 @@ import taboolib.common.platform.function.getDataFolder
 import taboolib.common.platform.function.getProxyPlayer
 import taboolib.common.platform.function.submit
 import taboolib.common.util.asList
+import taboolib.common5.Baffle
 import taboolib.expansion.*
 import taboolib.module.chat.colored
 import taboolib.platform.BukkitPlugin
 import taboolib.platform.compat.VaultService
 import taboolib.platform.util.actionBar
 import taboolib.platform.util.onlinePlayers
+import java.util.concurrent.TimeUnit
 
 object GptBot : Plugin() {
 
@@ -32,7 +34,7 @@ object GptBot : Plugin() {
     var echo=true
     lateinit var plugin:JavaPlugin
 
-    // TODO: 2023/1/9  1.主动@机器人 ，需要金币花费或者权限，或者执行动作  2.游戏中更换apikey 3.游戏中查看apikey的余额  4.自动重载的耦合度太高 7.自定义机器人
+    // TODO: 2023/1/9
     override fun onEnable() {
         var conf=ConfigObject.config
         if (conf.getBoolean("database.enable")) {
@@ -77,6 +79,15 @@ object GptBot : Plugin() {
                             sender.sendMessage(Message.WRONG_NUMBER.colored())
                         }
                     }
+                }
+            }
+            literal("reload"){
+                execute<CommandSender>(){sender, context, argument ->
+                    ChatEvent.baffle.resetAll()
+                    ChatEvent.baffle10s.resetAll()
+                    ChatEvent.baffle= Baffle.of(ConfigObject.autoChat_interval.toInt())
+                    ChatEvent.baffle10s= Baffle.of(ConfigObject.cool.toLong(),TimeUnit.SECONDS)
+                    sender.sendMessage("&a重载完成".colored())
                 }
             }
             literal("kether"){
