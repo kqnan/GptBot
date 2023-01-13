@@ -20,12 +20,14 @@ import taboolib.common.platform.function.getProxyPlayer
 import taboolib.common.platform.function.submit
 import taboolib.common.util.asList
 import taboolib.common5.Baffle
+import taboolib.common5.FileWatcher
 import taboolib.expansion.*
 import taboolib.module.chat.colored
 import taboolib.platform.BukkitPlugin
 import taboolib.platform.compat.VaultService
 import taboolib.platform.util.actionBar
 import taboolib.platform.util.onlinePlayers
+import java.io.File
 import java.util.concurrent.TimeUnit
 
 object GptBot : Plugin() {
@@ -46,9 +48,12 @@ object GptBot : Plugin() {
             ChatGPT.Model.valueOf(ConfigObject.model),ConfigObject.token_len.toInt(),ConfigObject.defualt_answer.colored())
         registercommand()
         plugin= BukkitPlugin.getInstance()
- //       debug(ConfigObject.condition)
+
 
     }
+
+
+
     override fun onDisable(){
         for (onlinePlayer in onlinePlayers) {
             onlinePlayer.releaseDataContainer()
