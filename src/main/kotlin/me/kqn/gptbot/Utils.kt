@@ -45,7 +45,7 @@ fun Array<String>.cut(length_limit:Int):Array<String>{
     while (tmp.length>20){
         newArr.add(tmp.substring(0,20))
         tmp=tmp.removeRange(0,20)
-    }   
+    }
     newArr.add(tmp)
     var res=Array<String>(newArr.size){it->newArr.get(it)}
    return res
