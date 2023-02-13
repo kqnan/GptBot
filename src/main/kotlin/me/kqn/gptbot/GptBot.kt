@@ -52,7 +52,7 @@ object GptBot : Plugin() {
         registercommand()
         plugin= BukkitPlugin.getInstance()
 
-      
+
 
     }
 

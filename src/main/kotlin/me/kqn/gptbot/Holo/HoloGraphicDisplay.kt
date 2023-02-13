@@ -9,7 +9,8 @@ import org.bukkit.entity.Player
 import org.bukkit.plugin.Plugin
 import taboolib.module.chat.colored
 import java.util.UUID
-
+/** ¼æÈÝHoloGraphicDisplay²å¼þ
+ * */
 class HoloGraphicDisplay :HoloDisplay {
     val holo:HolographicDisplaysAPI
     private val data=HashMap<UUID,Hologram>()
