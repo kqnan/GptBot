@@ -13,7 +13,7 @@ This project makes ChatGpt or other ai chat bots communicate with players in ord
 * Bot ignores sensitive words
 * Use the return value of kether scripts as condition when players call the bot
 
-
+![img.png](img.png)
 # Build
 **Windows:**
 
