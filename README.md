@@ -12,7 +12,7 @@ Language:&nbsp;[中文](README.md)&nbsp;&nbsp;[English](README_EN.md)
 * 敏感词验证，包含政治，暴力，色情等敏感词的内容，机器人不予回复
 * 支持以kether脚本返回值为条件的主动呼叫ai功能
 
-![img.png](img.png)
+![img.png](img.png)  
 **Windows:**
 
 ```
