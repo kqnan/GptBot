@@ -2,8 +2,10 @@ package me.kqn.gptbot
 
 import me.kqn.gptbot.Bot.ChatGPT
 import me.kqn.gptbot.Displayer.SingletonDisplayer
+import me.kqn.gptbot.Holo.HoloDisplay
 import net.minecraft.network.protocol.game.PacketPlayOutEntity
 import org.bukkit.Bukkit
+import org.bukkit.Location
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerJoinEvent
@@ -18,6 +20,7 @@ import taboolib.common.platform.event.SubscribeEvent
 import taboolib.common.platform.function.getDataFolder
 import taboolib.common.platform.function.getProxyPlayer
 import taboolib.common.platform.function.submit
+import taboolib.common.platform.function.submitAsync
 import taboolib.common.util.asList
 import taboolib.common5.Baffle
 import taboolib.common5.FileWatcher
@@ -49,6 +52,7 @@ object GptBot : Plugin() {
         registercommand()
         plugin= BukkitPlugin.getInstance()
 
+      
 
     }
 
@@ -58,6 +62,7 @@ object GptBot : Plugin() {
         for (onlinePlayer in onlinePlayers) {
             onlinePlayer.releaseDataContainer()
         }
+        HookPlugin.holoDisplay?.onDisable()
     }
     @SubscribeEvent
     fun setupData(e: PlayerJoinEvent) {

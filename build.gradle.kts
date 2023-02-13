@@ -26,7 +26,7 @@ repositories {
     maven ( "https://maven.aliyun.com/repository/google")
     maven ( "https://maven.aliyun.com/repository/public" )
     maven(  "https://maven.aliyun.com/repository/gradle-plugin" )
-
+    maven("https://repo.codemc.io/repository/maven-public/")
 
 
 
@@ -36,7 +36,7 @@ repositories {
 
 dependencies {
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
-
+    compileOnly("me.filoghost.holographicdisplays:holographicdisplays-api:3.0.0")
     compileOnly("ink.ptms:nms-all:1.0.0")
     compileOnly("ink.ptms.core:v11902:11902-minimize:mapped")
     compileOnly("ink.ptms.core:v11902:11902-minimize:universal")
