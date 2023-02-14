@@ -9,6 +9,8 @@ ChatGpt:
 autoChat:
   enable: true
   interval: 10
+#给玩家展示文本的方式：HOLO（通过全息文字），CHAT（聊天栏
+Display: HOLO
 #玩家主动呼叫机器人
 atBot:
   enable: true

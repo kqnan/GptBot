@@ -17,6 +17,11 @@ class HoloGraphicDisplay :HoloDisplay {
     constructor(plugin: Plugin){
         holo= HolographicDisplaysAPI.get(plugin)
     }
+
+    override fun setPosition(player: Player, location:Location) {
+        val holos= data[player.uniqueId] ?: return
+        holos.setPosition(location.clone())
+    }
     override fun showToPlayer(player: Player,message: Array<String>, offset: Location) {
         var holos=data.getOrDefault(player.uniqueId,holo.createHologram(player.location.clone()))
         holos.lines.clear()

@@ -10,6 +10,9 @@ interface HoloDisplay {
     /**移除玩家的holo
      * */
     fun removeHolo(player:Player)
+    /**为玩家的holo设置位置
+     * */
+    fun setPosition(player: Player,location: Location)
     /**
      * 插件关闭时调用
      * */

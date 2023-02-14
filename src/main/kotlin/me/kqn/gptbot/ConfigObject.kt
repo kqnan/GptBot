@@ -33,6 +33,8 @@ object ConfigObject {
     lateinit var enable:java.lang.Boolean
     @ConfigNode(value="atBot.cool")
     lateinit var cool:Integer
+    @ConfigNode(value="Display")
+    lateinit var display:String
 
 
     @ConfigNode(value = "ChatGpt.token_length")

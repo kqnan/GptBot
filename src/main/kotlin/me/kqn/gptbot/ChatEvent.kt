@@ -40,8 +40,8 @@ object ChatEvent {
                             action.eval(e.player)
 
                             var bot= ChatGPT.instance(ConfigObject.api_key, ChatGPT.Model.valueOf(ConfigObject.model),ConfigObject.token_len.toInt(),ConfigObject.defualt_answer)
-
-                            FancyChatDisplayer.getPreset().display(bot.input(chagemsg.removePrefix(prefix)),e.player)
+                            GptBot.displayer.display(bot.input(chagemsg.removePrefix(prefix)),e.player)
+            //                FancyChatDisplayer.getPreset().display(bot.input(chagemsg.removePrefix(prefix)),e.player)
                         }
                         else {
                             ConfigObject.deny.eval(e.player)
@@ -68,7 +68,8 @@ object ChatEvent {
                 var rsp=bot?.input(e.message)
                 rsp?.let {
                     for (onlinePlayer in onlinePlayers()) {
-                        FancyChatDisplayer.getPreset().display(it,(onlinePlayer as BukkitPlayer).player)
+                        GptBot.displayer.display(it,(onlinePlayer as BukkitPlayer).player)
+                    //FancyChatDisplayer.getPreset().display(it,(onlinePlayer as BukkitPlayer).player)
                     }
                 }
             }

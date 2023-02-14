@@ -1,6 +1,9 @@
 package me.kqn.gptbot
 
 import me.kqn.gptbot.Bot.ChatGPT
+import me.kqn.gptbot.Displayer.FancyChatDisplayer
+import me.kqn.gptbot.Displayer.HoloDisplayer
+import me.kqn.gptbot.Displayer.IDisplayer
 import me.kqn.gptbot.Displayer.SingletonDisplayer
 import me.kqn.gptbot.Holo.HoloDisplay
 import net.minecraft.network.protocol.game.PacketPlayOutEntity
@@ -38,7 +41,7 @@ object GptBot : Plugin() {
     lateinit var gpt: ChatGPT
     var echo=true
     lateinit var plugin:JavaPlugin
-
+    lateinit var displayer:IDisplayer
     // TODO: 2023/1/9
     override fun onEnable() {
         var conf=ConfigObject.config
@@ -46,6 +49,10 @@ object GptBot : Plugin() {
             setupPlayerDatabase(conf.getConfigurationSection("database")!!)
         } else {
             setupPlayerDatabase(newFile(getDataFolder(), "data.db"))
+        }
+        when(ConfigObject.display){
+            "HOLO"-> displayer=HoloDisplayer()
+            "CHAT"-> displayer=FancyChatDisplayer.getPreset()
         }
         gpt= ChatGPT.instance(ConfigObject.api_key,
             ChatGPT.Model.valueOf(ConfigObject.model),ConfigObject.token_len.toInt(),ConfigObject.defualt_answer.colored())
